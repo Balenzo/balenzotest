@@ -357,16 +357,18 @@ button.competition-card {
 .modal {
   display: none;
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2000;
 
-  /* Achtergrond */
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
-  /* Scroll mogelijk maken */
-  overflow-y: auto;
+  /* Scrollbaar */
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
   /* Ruimte rondom */
@@ -374,23 +376,18 @@ button.competition-card {
 }
 
 .modal.show {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 40px;
-  padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  display: block;
 }
 
 /* Modal box */
 .modal-content {
   width: 100%;
   max-width: 420px;
-  margin: 0 auto;
+  margin: 40px auto calc(40px + env(safe-area-inset-bottom));
 
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 24px;
-
   padding: 24px;
 }
 
@@ -414,7 +411,7 @@ button.competition-card {
   flex-shrink: 0;
 }
 
-/* Knoppen onderaan */
+/* Actieknoppen */
 .modal-actions {
   display: flex;
   gap: 12px;
