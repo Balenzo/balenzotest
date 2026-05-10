@@ -65,6 +65,7 @@ body {
   right: 24px;
   bottom: 28px;
   z-index: 2;
+  text-align: center;
 }
 
 .hero-content h1 {
@@ -72,6 +73,14 @@ body {
   font-size: 34px;
   font-weight: 800;
   line-height: 1.05;
+  text-align: center;
+}
+
+.hero-content p {
+  margin: 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
 }
 
 .hero-content p {
