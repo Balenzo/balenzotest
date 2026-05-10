@@ -402,3 +402,20 @@ body {
   color: #ffffff;
   text-decoration: none;
 }
+
+/* Forceer witte tekst voor alle links binnen Quick Cards */
+a.quick-card,
+a.quick-card:link,
+a.quick-card:visited,
+a.quick-card:hover,
+a.quick-card:active,
+a.quick-card:focus,
+a.quick-card * {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Safari-specifiek */
+a.quick-card {
+  -webkit-text-fill-color: #ffffff !important;
+}
