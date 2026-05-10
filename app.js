@@ -1,104 +1,77 @@
-// FAVORIETEN DATA
-const favorites = [
-  {
-    title: "Live Scores",
-    subtitle: "Bekijk live wedstrijden",
-    icon: "📺",
-    url: "https://cuescore.com/venue/table/jumbotron/?venueId=1280972&branchId=1"
-  },
-  {
-    title: "Belgische Beker",
-    subtitle: "Schema & uitslagen",
-    icon: "🏆",
-    url: "https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139"
-  },
-  {
-    title: "Mijn Profiel",
-    subtitle: "Open jouw Cuescore",
-    icon: "👤",
-    url: localStorage.getItem("cuescoreProfile") || "#"
-  }
-];
+// Wacht tot de pagina volledig geladen is
+document.addEventListener('DOMContentLoaded', function () {
 
-// FAVORIETEN TONEN
-function loadFavorites(){
+  // Alle schermen en navigatieknoppen ophalen
+  const screens = document.querySelectorAll('.screen');
+  const navButtons = document.querySelectorAll('.nav-item');
 
-  const container = document.getElementById("favoritesList");
+  // Functie om een scherm te tonen
+  function showScreen(screenId) {
+    // Verberg alle schermen
+    screens.forEach(screen => {
+      screen.classList.remove('active');
+    });
 
-  container.innerHTML = "";
-
-  favorites.forEach(item => {
-
-    const card = document.createElement("a");
-
-    card.className = "favoriteCard";
-
-    card.href = item.url;
-
-    card.target = "_blank";
-
-    card.innerHTML = `
-      <h3>${item.icon} ${item.title}</h3>
-      <p>${item.subtitle}</p>
-    `;
-
-    container.appendChild(card);
-
-  });
-
-}
-
-// PROFIEL INSTELLEN
-function setProfile(){
-
-  let link = prompt("Plak je Cuescore profiel link");
-
-  if(link){
-
-    localStorage.setItem("cuescoreProfile", link);
-
-    alert("Profiel opgeslagen 👍");
-
-    location.reload();
-
+    // Toon het geselecteerde scherm
+    const selectedScreen = document.getElementById(screenId);
+    if (selectedScreen) {
+      selectedScreen.classList.add('active');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   }
 
-}
+  // Klikgedrag voor bottom navigation
+  navButtons.forEach(button => {
+    button.addEventListener('click', function () {
 
-// NAVIGATIE
-document.querySelectorAll(".navBtn").forEach(btn => {
+      // Actieve knop aanpassen
+      navButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      this.classList.add('active');
 
-  btn.addEventListener("click", () => {
+      // Doelscherm ophalen
+      const target = this.getAttribute('data-target');
 
-    document.querySelectorAll(".navBtn")
-      .forEach(b => b.classList.remove("active"));
+      // Scherm tonen
+      if (target) {
+        showScreen(target);
+      }
 
-    btn.classList.add("active");
+      // Favorieten-knop scrollt naar boven op het home screen
+      if (this.querySelector('.nav-label')?.textContent === 'Favorieten') {
+        showScreen('homeScreen');
 
+        setTimeout(() => {
+          const favoritesSection = document.querySelector('.favorites-row');
+          if (favoritesSection) {
+            favoritesSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 200);
+      }
+    });
   });
+
+  // Tab-buttons in Competities
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Service Worker registreren (optioneel)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('Service Worker geregistreerd'))
+      .catch(err => console.log('Service Worker fout:', err));
+  }
 
 });
-
-// SWIPE EFFECT
-document.querySelectorAll(".card, .quickCard").forEach(card => {
-
-  card.addEventListener("touchstart", () => {
-    card.style.transform = "scale(0.97)";
-  });
-
-  card.addEventListener("touchend", () => {
-    card.style.transform = "scale(1)";
-  });
-
-});
-
-// INIT
-loadFavorites();
-
-// SERVICE WORKER
-if ("serviceWorker" in navigator) {
-
-  navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("SW geregistreerd"));
-
-}
