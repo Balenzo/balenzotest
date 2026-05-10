@@ -107,14 +107,32 @@ function renderFavorites() {
     const item = favoriteOptions[id];
     if (!item) return;
 
-    const card = document.createElement(item.url ? 'a' : 'div');
-    card.className = 'favorite-card';
+    let card;
 
-    if (item.url && item.url !== '#') {
-      card.href = item.url;
-      card.target = '_blank';
-      card.rel = 'noopener noreferrer';
-    }
+// Mijn profiel opent openProfile()
+if (id === 'myProfile') {
+  card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'favorite-card';
+  card.style.border = 'none';
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', openProfile);
+}
+
+// Normale externe links
+else if (item.url && item.url !== '#') {
+  card = document.createElement('a');
+  card.className = 'favorite-card';
+  card.href = item.url;
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+}
+
+// Niet-klikbare items
+else {
+  card = document.createElement('div');
+  card.className = 'favorite-card';
+}
 
     card.innerHTML = `
       <div class="favorite-icon">${item.icon}</div>
