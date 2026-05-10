@@ -27,11 +27,9 @@ body {
   position: relative;
   height: 280px;
   background:
-    radial-gradient(circle at 75% 30%, rgba(255, 170, 0, 0.35), transparent 20%),
-    linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.85)),
-    url('balenzoclub.jpeg') center/cover no-repeat;
+    linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.85)),
+    url('hero.jpg') center center / cover no-repeat;
 }
-
 .hero-overlay {
   position: absolute;
   inset: 0;
