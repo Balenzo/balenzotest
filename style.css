@@ -19,7 +19,7 @@ body {
 }
 
 /* =========================
-   APP CONTAINER
+   SCHERMEN
 ========================= */
 .screen {
   display: none;
@@ -27,7 +27,11 @@ body {
   max-width: 430px;
   min-height: 100vh;
   background: #000;
-  padding-bottom: 100px;
+  position: relative;
+  z-index: 1;
+
+  /* Extra ruimte voor bottom navigation + iPhone safe area */
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
 }
 
 .screen.active {
@@ -35,20 +39,15 @@ body {
 }
 
 /* =========================
-   HERO BANNER
+   HERO
 ========================= */
 .hero {
   position: relative;
   height: 280px;
   overflow: hidden;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.85)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.85)),
     url('hero.jpg') center center / cover no-repeat;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
 }
 
 .hero-logo {
@@ -77,8 +76,8 @@ body {
 
 .hero-content p {
   margin: 0;
-  color: rgba(255,255,255,0.85);
   font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* =========================
@@ -125,12 +124,19 @@ body {
 }
 
 .favorite-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   flex: 0 0 auto;
   min-width: 120px;
-  background: linear-gradient(180deg, #1a1a1a, #111);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 18px;
   padding: 18px 14px;
+
+  background: linear-gradient(180deg, #1a1a1a, #111);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+
   text-align: center;
   text-decoration: none;
   color: #fff;
@@ -156,14 +162,21 @@ body {
 }
 
 .quick-card {
-  background: linear-gradient(180deg, #b00000, #7a0000);
-  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   padding: 18px 12px;
+  border-radius: 18px;
+
+  background: linear-gradient(180deg, #b00000, #7a0000);
+  box-shadow: 0 8px 24px rgba(139, 0, 0, 0.35);
+
   text-align: center;
   text-decoration: none !important;
   color: #fff !important;
   -webkit-text-fill-color: #fff !important;
-  box-shadow: 0 8px 24px rgba(139, 0, 0, 0.35);
 }
 
 .quick-card * {
@@ -234,17 +247,20 @@ body {
 }
 
 /* =========================
-   COMPETITIE KAARTEN
+   COMPETITIEKAARTEN
 ========================= */
 .competition-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: linear-gradient(180deg, #181818, #101010);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 18px;
+
   padding: 18px;
   margin-bottom: 14px;
+
+  background: linear-gradient(180deg, #181818, #101010);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+
   text-decoration: none;
   color: #fff;
 }
@@ -265,12 +281,12 @@ body {
 
 .competition-subtitle {
   font-size: 13px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .competition-arrow {
   font-size: 24px;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 /* =========================
@@ -281,27 +297,48 @@ body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+
   width: 100%;
   max-width: 430px;
+
   display: flex;
+
   background: rgba(10, 10, 10, 0.96);
   backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,0.06);
-  z-index: 1000;
+  -webkit-backdrop-filter: blur(12px);
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+  /* iPhone safe area */
+  padding-bottom: env(safe-area-inset-bottom);
+
+  z-index: 99999;
+  pointer-events: auto;
 }
 
 .nav-item {
   flex: 1;
+
   border: none;
   background: none;
-  color: rgba(255,255,255,0.65);
-  padding: 12px 8px;
+
+  color: rgba(255, 255, 255, 0.65);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+
   font-size: 20px;
+  font-weight: 500;
+
   cursor: pointer;
+
+  padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
+
+  position: relative;
+  z-index: 100000;
+  pointer-events: auto;
 }
 
 .nav-item.active {
@@ -320,10 +357,13 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 2000;
   padding: 24px;
+
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  z-index: 2000;
 }
 
 .modal.show {
@@ -335,10 +375,12 @@ body {
 .modal-content {
   width: 100%;
   max-width: 420px;
+
   background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 24px;
+
   padding: 24px;
-  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .modal-content h3 {
@@ -383,97 +425,4 @@ body {
 .modal-btn.primary {
   background: linear-gradient(180deg, #d60000, #8b0000);
   color: #fff;
-}
-
-/* Maak kaarten volledig klikbaar */
-.quick-card,
-.competition-card,
-.favorite-card {
-  display: flex;
-}
-
-/* Quick cards behouden verticale layout */
-.quick-card {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Favorieten als verticale kaarten */
-.favorite-card {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Zorg dat links interactief blijven */
-a.quick-card,
-a.competition-card,
-a.favorite-card {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* Zorg dat de bottom navigation altijd boven alle content ligt */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 430px;
-  display: flex;
-  background: rgba(10, 10, 10, 0.96);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  z-index: 99999;          /* zeer hoog zodat niets erboven komt */
-  pointer-events: auto;    /* expliciet klikbaar */
-}
-
-/* Maak de knoppen zelf ook expliciet klikbaar */
-.bottom-nav .nav-item {
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* Extra ruimte onderaan zodat content niet achter het menu verdwijnt */
-.screen {
-  padding-bottom: 110px;
-}
-
-/* Zorg dat de schermen nooit boven de bottom navigation liggen */
-.screen {
-  position: relative;
-  z-index: 1;
-  padding-bottom: 110px;
-}
-
-/* Bottom navigation altijd boven alles en volledig klikbaar */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 430px;
-  display: flex;
-  background: rgba(10, 10, 10, 0.96);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  z-index: 99999;
-  pointer-events: auto;
-}
-
-/* Maak de knoppen expliciet klikbaar */
-.bottom-nav .nav-item {
-  position: relative;
-  z-index: 100000;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-/* Verborgen schermen mogen nooit klikken onderscheppen */
-.screen:not(.active) {
-  display: none;
-  pointer-events: none;
 }
