@@ -5,7 +5,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -29,8 +30,6 @@ body {
   background: #000;
   position: relative;
   z-index: 1;
-
-  /* Extra ruimte voor bottom navigation + iPhone safe area */
   padding-bottom: calc(110px + env(safe-area-inset-bottom));
 }
 
@@ -254,6 +253,7 @@ body {
   align-items: center;
   gap: 14px;
 
+  width: 100%;
   padding: 18px;
   margin-bottom: 14px;
 
@@ -263,6 +263,12 @@ body {
 
   text-decoration: none;
   color: #fff;
+}
+
+button.competition-card {
+  border: none;
+  font: inherit;
+  text-align: left;
 }
 
 .competition-icon {
@@ -309,11 +315,9 @@ body {
 
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 
-  /* iPhone safe area */
   padding-bottom: env(safe-area-inset-bottom);
 
   z-index: 99999;
-  pointer-events: auto;
 }
 
 .nav-item {
@@ -335,10 +339,6 @@ body {
   cursor: pointer;
 
   padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
-
-  position: relative;
-  z-index: 100000;
-  pointer-events: auto;
 }
 
 .nav-item.active {
