@@ -413,3 +413,30 @@ a.favorite-card {
   pointer-events: auto;
   cursor: pointer;
 }
+
+/* Zorg dat de bottom navigation altijd boven alle content ligt */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 99999;          /* zeer hoog zodat niets erboven komt */
+  pointer-events: auto;    /* expliciet klikbaar */
+}
+
+/* Maak de knoppen zelf ook expliciet klikbaar */
+.bottom-nav .nav-item {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Extra ruimte onderaan zodat content niet achter het menu verdwijnt */
+.screen {
+  padding-bottom: 110px;
+}
