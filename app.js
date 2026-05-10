@@ -101,44 +101,56 @@ function renderFavorites() {
   const container = document.querySelector('.favorites-row');
   if (!container) return;
 
+  // Maak de lijst leeg
   container.innerHTML = '';
 
+  // Toon alle geselecteerde favorieten
   favorites.forEach(id => {
     const item = favoriteOptions[id];
     if (!item) return;
 
     let card;
 
-// Mijn profiel opent openProfile()
-if (id === 'myProfile') {
-  card = document.createElement('button');
-  card.type = 'button';
-  card.className = 'favorite-card';
-  card.style.border = 'none';
-  card.style.cursor = 'pointer';
-  card.addEventListener('click', openProfile);
-}
+    // 👤 Mijn profiel opent het opgeslagen CueScore-profiel
+    if (id === 'myProfile') {
+      card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'favorite-card';
 
-// Normale externe links
-else if (item.url && item.url !== '#') {
-  card = document.createElement('a');
-  card.className = 'favorite-card';
-  card.href = item.url;
-  card.target = '_blank';
-  card.rel = 'noopener noreferrer';
-}
+      // Button-stijl neutraliseren
+      card.style.border = 'none';
+      card.style.cursor = 'pointer';
+      card.style.background = 'linear-gradient(180deg, #1a1a1a, #111)';
+      card.style.color = '#fff';
 
-// Niet-klikbare items
-else {
-  card = document.createElement('div');
-  card.className = 'favorite-card';
-}
+      // Klikactie
+      card.addEventListener('click', function () {
+        openProfile();
+      });
+    }
 
+    // 🔗 Gewone externe links
+    else if (item.url && item.url !== '#') {
+      card = document.createElement('a');
+      card.className = 'favorite-card';
+      card.href = item.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+    }
+
+    // 📦 Niet-klikbare items
+    else {
+      card = document.createElement('div');
+      card.className = 'favorite-card';
+    }
+
+    // Inhoud van de kaart
     card.innerHTML = `
       <div class="favorite-icon">${item.icon}</div>
       <div class="favorite-title">${item.title}</div>
     `;
 
+    // Voeg kaart toe aan de lijst
     container.appendChild(card);
   });
 }
