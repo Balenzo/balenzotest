@@ -2,7 +2,6 @@
 // FAVORIETEN
 // ===============================
 
-// Beschikbare favorieten
 const favoriteOptions = {
   myProfile: {
     icon: '👤',
@@ -24,43 +23,80 @@ const favoriteOptions = {
     title: 'Clubpagina',
     url: 'https://cuescore.com/bal-enzobilliardsdarts'
   },
-  'competition-be1': {
+  'competition-first': {
     icon: '🏆',
     title: 'Eerste Klasse',
-    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085'
+    url: '#'
   },
-  'competition-be2': {
+  'competition-second': {
     icon: '🏆',
     title: 'Tweede Klasse',
-    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109'
+    url: '#'
   },
-  'competition-be3': {
+  'competition-third': {
     icon: '🏆',
     title: 'Derde Klasse',
-    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127'
+    url: '#'
   },
-  'competition-be-beker': {
+  'competition-cup': {
     icon: '🏆',
-    title: 'Belgische Beker',
-    url: 'https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139'
+    title: 'Beker',
+    url: '#'
   },
-  'tournament-netherlands': {
-    icon: '🇳🇱',
-    title: 'Tornooien Nederland',
-    url: 'https://cuescore.com/tournaments/?c=1000231'
+  'breakplay-1': {
+    icon: '🎱',
+    title: 'Break & Play Reeks 1',
+    url: '#'
+  },
+  'breakplay-2': {
+    icon: '🎱',
+    title: 'Break & Play Reeks 2',
+    url: '#'
+  },
+  'breakplay-3': {
+    icon: '🎱',
+    title: 'Break & Play Reeks 3',
+    url: '#'
+  },
+  'breakplay-4': {
+    icon: '🎱',
+    title: 'Break & Play Reeks 4',
+    url: '#'
+  },
+  'breakplay-5': {
+    icon: '🎱',
+    title: 'Break & Play Reeks 5',
+    url: '#'
+  },
+  facebook: {
+    icon: '📘',
+    title: 'Facebook',
+    url: 'https://www.facebook.com/'
+  },
+  instagram: {
+    icon: '📸',
+    title: 'Instagram',
+    url: 'https://www.instagram.com/'
+  },
+  start2pool: {
+    icon: '🎱',
+    title: 'Start2Pool',
+    url: '#'
   }
 };
 
 // Favorieten laden
 let favorites = JSON.parse(localStorage.getItem('favorites'));
 
-// Standaard enkel Mijn profiel
 if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
   favorites = ['myProfile'];
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-// Favorieten renderen
+// ===============================
+// FAVORIETEN RENDEREN
+// ===============================
+
 function renderFavorites() {
   const container = document.querySelector('.favorites-row');
   if (!container) return;
@@ -72,10 +108,9 @@ function renderFavorites() {
     if (!item) return;
 
     const card = document.createElement(item.url ? 'a' : 'div');
-
     card.className = 'favorite-card';
 
-    if (item.url) {
+    if (item.url && item.url !== '#') {
       card.href = item.url;
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
@@ -90,7 +125,10 @@ function renderFavorites() {
   });
 }
 
-// Popup openen
+// ===============================
+// FAVORIETEN MODAL
+// ===============================
+
 function openFavoritesEditor() {
   const modal = document.getElementById('favoritesModal');
   const container = document.getElementById('favoritesOptions');
@@ -116,15 +154,11 @@ function openFavoritesEditor() {
   modal.classList.add('show');
 }
 
-// Popup sluiten
 function closeFavoritesEditor() {
-  const modal = document.getElementById('favoritesModal');
-  if (modal) {
-    modal.classList.remove('show');
-  }
+  document.getElementById('favoritesModal')
+    ?.classList.remove('show');
 }
 
-// Favorieten opslaan
 function saveFavoritesSelection() {
   const checked = document.querySelectorAll(
     '#favoritesOptions input[type="checkbox"]:checked'
@@ -132,7 +166,6 @@ function saveFavoritesSelection() {
 
   favorites = Array.from(checked).map(input => input.value);
 
-  // Altijd minstens één favoriet
   if (favorites.length === 0) {
     favorites = ['myProfile'];
   }
@@ -141,6 +174,29 @@ function saveFavoritesSelection() {
 
   renderFavorites();
   closeFavoritesEditor();
+}
+
+// ===============================
+// PROFIEL
+// ===============================
+
+function setProfile() {
+  const url = prompt('Voer de link van je CueScore-profiel in:');
+  if (!url) return;
+
+  localStorage.setItem('myProfileUrl', url);
+  alert('Profiel opgeslagen.');
+}
+
+function openProfile() {
+  const url = localStorage.getItem('myProfileUrl');
+
+  if (!url) {
+    alert('Je hebt nog geen profiel ingesteld.');
+    return;
+  }
+
+  window.open(url, '_blank');
 }
 
 // ===============================
@@ -174,58 +230,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
   navButtons.forEach(button => {
     button.addEventListener('click', function () {
-
-      navButtons.forEach(btn => {
-        btn.classList.remove('active');
-      });
-
+      navButtons.forEach(btn => btn.classList.remove('active'));
       this.classList.add('active');
 
-      const label = this.querySelector('.nav-label')?.textContent;
-
-      // Favorieten-knop scrollt naar Mijn Favorieten
-      if (label === 'Favorieten') {
-        showScreen('homeScreen');
-
-        setTimeout(() => {
-          const section = document.querySelector('.favorites-row');
-          if (section) {
-            section.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }, 200);
-
-        return;
-      }
-
-      // Normale schermwissel
       const target = this.getAttribute('data-target');
+
       if (target) {
         showScreen(target);
       }
     });
   });
 
-  // Tabs Competities
+  // Competitie tabs
   const tabs = document.querySelectorAll('.tab');
 
   tabs.forEach(tab => {
     tab.addEventListener('click', function () {
 
-      // Tabknoppen
       tabs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
 
-      // Inhoud verbergen
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
       });
 
-      // Juiste inhoud tonen
-      const tabName = this.dataset.tab;
-      const target = document.getElementById('tab-' + tabName);
+      const target = document.getElementById(
+        'tab-' + this.dataset.tab
+      );
 
       if (target) {
         target.classList.add('active');
@@ -233,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Service Worker registreren
+  // Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('Service Worker geregistreerd'))
