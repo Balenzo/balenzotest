@@ -440,3 +440,40 @@ a.favorite-card {
 .screen {
   padding-bottom: 110px;
 }
+
+/* Zorg dat de schermen nooit boven de bottom navigation liggen */
+.screen {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 110px;
+}
+
+/* Bottom navigation altijd boven alles en volledig klikbaar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  z-index: 99999;
+  pointer-events: auto;
+}
+
+/* Maak de knoppen expliciet klikbaar */
+.bottom-nav .nav-item {
+  position: relative;
+  z-index: 100000;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Verborgen schermen mogen nooit klikken onderscheppen */
+.screen:not(.active) {
+  display: none;
+  pointer-events: none;
+}
