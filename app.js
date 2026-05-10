@@ -101,32 +101,40 @@ function renderFavorites() {
   const container = document.querySelector('.favorites-row');
   if (!container) return;
 
-  // Maak de lijst leeg
+  // Lijst leegmaken
   container.innerHTML = '';
 
-  // Toon alle geselecteerde favorieten
+  // Alle geselecteerde favorieten tonen
   favorites.forEach(id => {
     const item = favoriteOptions[id];
     if (!item) return;
 
     let card;
 
-    // 👤 Mijn profiel opent het opgeslagen CueScore-profiel
+    // 👤 Mijn profiel: maak een echte link met de opgeslagen profiel-URL
     if (id === 'myProfile') {
-      card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'favorite-card';
+      const profileUrl = localStorage.getItem('myProfileUrl');
 
-      // Button-stijl neutraliseren
-      card.style.border = 'none';
-      card.style.cursor = 'pointer';
-      card.style.background = 'linear-gradient(180deg, #1a1a1a, #111)';
-      card.style.color = '#fff';
+      if (profileUrl && profileUrl.trim() !== '') {
+        card = document.createElement('a');
+        card.className = 'favorite-card';
+        card.href = profileUrl.trim();
+        card.target = '_blank';
+        card.rel = 'noopener noreferrer';
+      } else {
+        // Nog geen profiel ingesteld
+        card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'favorite-card';
+        card.style.border = 'none';
+        card.style.cursor = 'pointer';
+        card.style.background = 'linear-gradient(180deg, #1a1a1a, #111)';
+        card.style.color = '#fff';
 
-      // Klikactie
-      card.addEventListener('click', function () {
-        openProfile();
-      });
+        card.addEventListener('click', function () {
+          openProfile();
+        });
+      }
     }
 
     // 🔗 Gewone externe links
@@ -150,11 +158,10 @@ function renderFavorites() {
       <div class="favorite-title">${item.title}</div>
     `;
 
-    // Voeg kaart toe aan de lijst
+    // Toevoegen aan de lijst
     container.appendChild(card);
   });
 }
-
 // ===============================
 // FAVORIETEN MODAL
 // ===============================
