@@ -8,7 +8,52 @@ if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
 
 // Toon melding bij klikken op "Wijzig"
 function openFavoritesEditor() {
-  alert("Klik op de sterretjes in de app om favorieten toe te voegen of te verwijderen.");
+  const options = [
+    { id: 'myProfile', label: '👤 Mijn profiel' },
+    { id: 'club-live', label: '📺 Live Scores' },
+    { id: 'club-reservation', label: '🪑 Tafel reserveren' },
+    { id: 'club-page', label: '🎱 Clubpagina' },
+    { id: 'competition-be1', label: '🏆 Eerste Klasse' },
+    { id: 'competition-be2', label: '🏆 Tweede Klasse' },
+    { id: 'competition-be3', label: '🏆 Derde Klasse' },
+    { id: 'competition-be-beker', label: '🏆 Belgische Beker' },
+    { id: 'bepoule1', label: '🎱 Break & Play Poule 1' }
+  ];
+
+  const current = new Set(favorites);
+
+  const selected = prompt(
+    "Kies je favorieten door nummers in te geven, gescheiden door komma's:\\n\\n" +
+    options.map((opt, index) => {
+      const checked = current.has(opt.id) ? '✓' : ' ';
+      return `${index + 1}. [${checked}] ${opt.label}`;
+    }).join('\\n') +
+    "\\n\\nVoorbeeld: 1,2,5"
+  );
+
+  if (selected === null) return; // gebruiker annuleert
+
+  const numbers = selected
+    .split(',')
+    .map(n => parseInt(n.trim(), 10))
+    .filter(n => !isNaN(n) && n >= 1 && n <= options.length);
+
+  if (numbers.length === 0) {
+    alert("Geen geldige selectie.");
+    return;
+  }
+
+  favorites = numbers.map(n => options[n - 1].id);
+
+  // Zorg dat Mijn profiel altijd beschikbaar blijft als niets gekozen is
+  if (favorites.length === 0) {
+    favorites = ['myProfile'];
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+
+  // Pagina herladen zodat de favorieten onmiddellijk zichtbaar zijn
+  location.reload();
 }
 
 // Wacht tot de pagina volledig geladen is
