@@ -419,3 +419,11 @@ a.quick-card * {
 a.quick-card {
   -webkit-text-fill-color: #ffffff !important;
 }
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
