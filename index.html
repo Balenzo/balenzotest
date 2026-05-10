@@ -2,22 +2,25 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Bal Enzo Club App</title>
 
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
+
   <meta name="theme-color" content="#000000">
   <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
 
-  <!-- HOME SCREEN -->
+  <!-- =========================
+       HOME SCREEN
+  ========================== -->
   <section class="screen active" id="homeScreen">
 
     <!-- HERO -->
     <header class="hero">
-      <div class="hero-overlay"></div>
       <img src="logo.png" alt="Bal Enzo" class="hero-logo">
 
       <div class="hero-content">
@@ -30,8 +33,11 @@
     <section class="section-block">
       <div class="section-header">
         <h2>⭐ Mijn Favorieten</h2>
-        <button class="link-btn" onclick="openFavoritesEditor()">Wijzig</button>
+        <button class="link-btn" onclick="openFavoritesEditor()">
+          Wijzig
+        </button>
       </div>
+
       <div class="favorites-row"></div>
     </section>
 
@@ -45,21 +51,24 @@
 
         <a class="quick-card"
            href="https://cuescore.com/venue/table/jumbotron/?venueId=1280972&branchId=1"
-           target="_blank" rel="noopener noreferrer">
+           target="_blank"
+           rel="noopener noreferrer">
           <div class="quick-icon">📺</div>
           <div class="quick-title">Live Scores</div>
         </a>
 
         <a class="quick-card"
            href="https://www.bal-enzo.be/reservaties/"
-           target="_blank" rel="noopener noreferrer">
+           target="_blank"
+           rel="noopener noreferrer">
           <div class="quick-icon">🪑</div>
           <div class="quick-title">Tafel reserveren</div>
         </a>
 
         <a class="quick-card"
            href="https://cuescore.com/bal-enzobilliardsdarts"
-           target="_blank" rel="noopener noreferrer">
+           target="_blank"
+           rel="noopener noreferrer">
           <div class="quick-icon">🎱</div>
           <div class="quick-title">Clubpagina</div>
         </a>
@@ -69,196 +78,211 @@
 
   </section>
 
-  <!-- COMPETITIES SCREEN -->
+  <!-- =========================
+       COMPETITIES SCREEN
+  ========================== -->
   <section class="screen" id="competitionsScreen">
     <div class="page-header">🏆 Competities</div>
 
     <div class="tab-bar">
-      <button class="tab active" data-tab="belgium">België</button>
-      <button class="tab" data-tab="netherlands">Nederland</button>
-      <button class="tab" data-tab="cups">Bekers</button>
+      <button class="tab active" data-tab="brabant">
+        Brabant / Antwerpen
+      </button>
+      <button class="tab" data-tab="breakplay">
+        Break & Play
+      </button>
     </div>
 
     <main class="content">
 
-      <!-- BELGIË -->
-      <div class="tab-content active" id="tab-belgium">
+      <!-- BRABANT / ANTWERPEN -->
+      <div class="tab-content active" id="tab-brabant">
 
-        <a class="competition-card"
-           href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085"
-           target="_blank" rel="noopener noreferrer">
+        <a class="competition-card" href="#" target="_blank">
           <div class="competition-icon">🏆</div>
           <div class="competition-info">
-            <div class="competition-title">Competitie BE Eerste Klasse</div>
-            <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+            <div class="competition-title">Eerste Klasse</div>
+            <div class="competition-subtitle">Alle info en uitslagen</div>
           </div>
           <div class="competition-arrow">›</div>
         </a>
 
-        <a class="competition-card"
-           href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109"
-           target="_blank" rel="noopener noreferrer">
+        <a class="competition-card" href="#" target="_blank">
           <div class="competition-icon">🏆</div>
           <div class="competition-info">
-            <div class="competition-title">Competitie BE Tweede Klasse</div>
-            <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+            <div class="competition-title">Tweede Klasse</div>
+            <div class="competition-subtitle">Alle info en uitslagen</div>
           </div>
           <div class="competition-arrow">›</div>
         </a>
 
-        <a class="competition-card"
-           href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127"
-           target="_blank" rel="noopener noreferrer">
+        <a class="competition-card" href="#" target="_blank">
           <div class="competition-icon">🏆</div>
           <div class="competition-info">
-            <div class="competition-title">Competitie BE Derde Klasse</div>
-            <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+            <div class="competition-title">Derde Klasse</div>
+            <div class="competition-subtitle">Alle info en uitslagen</div>
           </div>
           <div class="competition-arrow">›</div>
         </a>
 
-      </div>
-
-      <!-- NEDERLAND -->
-      <div class="tab-content" id="tab-netherlands">
-        <a class="competition-card"
-           href="https://cuescore.com/tournaments/?c=1000231"
-           target="_blank" rel="noopener noreferrer">
-          <div class="competition-icon">🇳🇱</div>
-          <div class="competition-info">
-            <div class="competition-title">Tornooien Nederland</div>
-            <div class="competition-subtitle">Alle Nederlandse tornooien</div>
-          </div>
-          <div class="competition-arrow">›</div>
-        </a>
-      </div>
-
-      <!-- BEKERS -->
-      <div class="tab-content" id="tab-cups">
-        <a class="competition-card"
-           href="https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139"
-           target="_blank" rel="noopener noreferrer">
+        <a class="competition-card" href="#" target="_blank">
           <div class="competition-icon">🏆</div>
           <div class="competition-info">
-            <div class="competition-title">Belgische Beker</div>
+            <div class="competition-title">Beker</div>
             <div class="competition-subtitle">Schema en resultaten</div>
           </div>
           <div class="competition-arrow">›</div>
         </a>
+
+      </div>
+
+      <!-- BREAK & PLAY -->
+      <div class="tab-content" id="tab-breakplay">
+
+        <a class="competition-card" href="#" target="_blank">
+          <div class="competition-icon">🎱</div>
+          <div class="competition-info">
+            <div class="competition-title">Break & Play Reeks 1</div>
+          </div>
+          <div class="competition-arrow">›</div>
+        </a>
+
+        <a class="competition-card" href="#" target="_blank">
+          <div class="competition-icon">🎱</div>
+          <div class="competition-info">
+            <div class="competition-title">Break & Play Reeks 2</div>
+          </div>
+          <div class="competition-arrow">›</div>
+        </a>
+
+        <a class="competition-card" href="#" target="_blank">
+          <div class="competition-icon">🎱</div>
+          <div class="competition-info">
+            <div class="competition-title">Break & Play Reeks 3</div>
+          </div>
+          <div class="competition-arrow">›</div>
+        </a>
+
+        <a class="competition-card" href="#" target="_blank">
+          <div class="competition-icon">🎱</div>
+          <div class="competition-info">
+            <div class="competition-title">Break & Play Reeks 4</div>
+          </div>
+          <div class="competition-arrow">›</div>
+        </a>
+
+        <a class="competition-card" href="#" target="_blank">
+          <div class="competition-icon">🎱</div>
+          <div class="competition-info">
+            <div class="competition-title">Break & Play Reeks 5</div>
+          </div>
+          <div class="competition-arrow">›</div>
+        </a>
+
       </div>
 
     </main>
   </section>
 
-  <!-- CLUB SCREEN -->
-<section class="screen" id="clubScreen">
-  <div class="page-header">🎱 Club</div>
+  <!-- =========================
+       CLUB SCREEN
+  ========================== -->
+  <section class="screen" id="clubScreen">
+    <div class="page-header">🎱 Club</div>
 
-  <main class="content">
+    <main class="content">
 
-    <a class="competition-card"
-       href="https://www.facebook.com/"
-       target="_blank"
-       rel="noopener noreferrer">
-      <div class="competition-icon">📘</div>
-      <div class="competition-info">
-        <div class="competition-title">Facebook</div>
-        <div class="competition-subtitle">Volg Bal Enzo op Facebook</div>
-      </div>
-      <div class="competition-arrow">›</div>
-    </a>
+      <a class="competition-card" href="https://www.facebook.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="competition-icon">📘</div>
+        <div class="competition-info">
+          <div class="competition-title">Facebook</div>
+          <div class="competition-subtitle">Volg Bal Enzo op Facebook</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-    <a class="competition-card"
-       href="https://www.instagram.com/"
-       target="_blank"
-       rel="noopener noreferrer">
-      <div class="competition-icon">📸</div>
-      <div class="competition-info">
-        <div class="competition-title">Instagram</div>
-        <div class="competition-subtitle">Volg Bal Enzo op Instagram</div>
-      </div>
-      <div class="competition-arrow">›</div>
-    </a>
+      <a class="competition-card" href="https://www.instagram.com/"
+         target="_blank" rel="noopener noreferrer">
+        <div class="competition-icon">📸</div>
+        <div class="competition-info">
+          <div class="competition-title">Instagram</div>
+          <div class="competition-subtitle">Volg Bal Enzo op Instagram</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-    <a class="competition-card"
-       href="#"
-       target="_blank"
-       rel="noopener noreferrer">
-      <div class="competition-icon">🎱</div>
-      <div class="competition-info">
-        <div class="competition-title">Start2Pool</div>
-        <div class="competition-subtitle">Ontdek onze lessen en initiaties</div>
-      </div>
-      <div class="competition-arrow">›</div>
-    </a>
+      <a class="competition-card" href="#"
+         target="_blank" rel="noopener noreferrer">
+        <div class="competition-icon">🎱</div>
+        <div class="competition-info">
+          <div class="competition-title">Start2Pool</div>
+          <div class="competition-subtitle">Ontdek onze lessen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-  </main>
-</section>
+    </main>
+  </section>
 
-<!-- PROFIEL SCREEN -->
-<section class="screen" id="profileScreen">
-  <div class="page-header">👤 Profiel</div>
+  <!-- =========================
+       PROFIEL SCREEN
+  ========================== -->
+  <section class="screen" id="profileScreen">
+    <div class="page-header">👤 Profiel</div>
 
-  <main class="content">
+    <main class="content">
 
-    <button class="competition-card"
-            onclick="setProfile()"
-            style="width:100%; border:none; cursor:pointer;">
-      <div class="competition-icon">⚙️</div>
-      <div class="competition-info">
-        <div class="competition-title">Mijn profiel instellen</div>
-        <div class="competition-subtitle">Sla je CueScore-profiel op</div>
-      </div>
-      <div class="competition-arrow">›</div>
+      <button class="competition-card"
+              onclick="setProfile()"
+              style="width:100%; border:none; cursor:pointer;">
+        <div class="competition-icon">⚙️</div>
+        <div class="competition-info">
+          <div class="competition-title">Mijn profiel instellen</div>
+          <div class="competition-subtitle">Sla je CueScore-profiel op</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </button>
+
+      <button class="competition-card"
+              onclick="openProfile()"
+              style="width:100%; border:none; cursor:pointer;">
+        <div class="competition-icon">👤</div>
+        <div class="competition-info">
+          <div class="competition-title">Mijn profiel openen</div>
+          <div class="competition-subtitle">Bekijk je CueScore-profiel</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </button>
+
+    </main>
+  </section>
+
+  <!-- =========================
+       BOTTOM NAVIGATION
+  ========================== -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-target="homeScreen">
+      <span>🏠</span>
+      <span class="nav-label">Home</span>
     </button>
 
-    <button class="competition-card"
-            onclick="openProfile()"
-            style="width:100%; border:none; cursor:pointer;">
-      <div class="competition-icon">👤</div>
-      <div class="competition-info">
-        <div class="competition-title">Mijn profiel openen</div>
-        <div class="competition-subtitle">Bekijk je CueScore-profiel</div>
-      </div>
-      <div class="competition-arrow">›</div>
+    <button class="nav-item" data-target="competitionsScreen">
+      <span>🏆</span>
+      <span class="nav-label">Competities</span>
     </button>
 
-  </main>
-</section>
-  
-  <!-- BOTTOM NAV -->
+    <button class="nav-item" data-target="clubScreen">
+      <span>🎱</span>
+      <span class="nav-label">Club</span>
+    </button>
 
-<!-- CLUB SCREEN -->
-<section class="screen" id="clubScreen">
-  ...
-</section>
+    <button class="nav-item" data-target="profileScreen">
+      <span>👤</span>
+      <span class="nav-label">Profiel</span>
+    </button>
+  </nav>
 
-<!-- PROFIEL SCREEN -->
-<section class="screen" id="profileScreen">
-  ...
-</section>
-
-<nav class="bottom-nav">
-  <button class="nav-item active" data-target="homeScreen">
-    <span>🏠</span>
-    <span class="nav-label">Home</span>
-  </button>
-
-  <button class="nav-item" data-target="competitionsScreen">
-    <span>🏆</span>
-    <span class="nav-label">Competities</span>
-  </button>
-
-  <button class="nav-item" data-target="clubScreen">
-    <span>🎱</span>
-    <span class="nav-label">Club</span>
-  </button>
-
-  <button class="nav-item" data-target="profileScreen">
-    <span>👤</span>
-    <span class="nav-label">Profiel</span>
-  </button>
-</nav>
   <!-- FAVORIETEN MODAL -->
   <div id="favoritesModal" class="modal">
     <div class="modal-content">
