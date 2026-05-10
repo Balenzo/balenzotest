@@ -13,10 +13,13 @@ if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
 
 // Beschikbare favorieten
 const favoriteOptions = {
+  // Profiel
   myProfile: {
     icon: '👤',
     title: 'Mijn profiel'
   },
+
+  // Club
   'club-live': {
     icon: '📺',
     title: 'Live Scores'
@@ -28,6 +31,30 @@ const favoriteOptions = {
   'club-page': {
     icon: '🎱',
     title: 'Clubpagina'
+  },
+
+  // Competities België
+  'competition-be1': {
+    icon: '🏆',
+    title: 'Eerste Klasse'
+  },
+  'competition-be2': {
+    icon: '🏆',
+    title: 'Tweede Klasse'
+  },
+  'competition-be3': {
+    icon: '🏆',
+    title: 'Derde Klasse'
+  },
+  'competition-be-beker': {
+    icon: '🏆',
+    title: 'Belgische Beker'
+  },
+
+  // Nederland
+  'tournament-netherlands': {
+    icon: '🇳🇱',
+    title: 'Tornooien Nederland'
   }
 };
 
