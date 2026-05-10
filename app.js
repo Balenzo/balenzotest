@@ -165,13 +165,27 @@ document.addEventListener('DOMContentLoaded', function () {
   // Competitie-tabs
   const tabs = document.querySelectorAll('.tab');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function () {
-      tabs.forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
+tabs.forEach(tab => {
+  tab.addEventListener('click', function () {
+    // Actieve tabknop
+    tabs.forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
 
+    // Inhoud verbergen
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+
+    // Juiste inhoud tonen
+    const tabName = this.dataset.tab;
+    const target = document.getElementById('tab-' + tabName);
+
+    if (target) {
+      target.classList.add('active');
+    }
+  });
+});
+  
   // Favorieten tonen
   renderFavorites();
 
