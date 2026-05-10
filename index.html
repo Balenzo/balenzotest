@@ -1,580 +1,231 @@
-index.html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bal Enzo Club App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bal Enzo Club App</title>
 
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon.png">
-<meta name="theme-color" content="#000000">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="theme-color" content="#000000">
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
-  background: #050505;
-  color: #ffffff;
-  padding-bottom: 90px;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  height: 300px;
-  background: url('balenzo.jpg') center center / cover no-repeat;
-}
-
-.hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom,
-      rgba(0, 0, 0, 0.10),
-      rgba(0, 0, 0, 0.92));
-}
-
-.hero-content {
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 24px;
-  z-index: 2;
-}
-
-.logo-card {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  border-radius: 28px;
-  background: rgba(15, 15, 15, 0.65);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 59, 59, 0.15);
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.45),
-    0 0 30px rgba(179, 0, 0, 0.10);
-}
-
-.logo-card img {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
-  object-fit: cover;
-  box-shadow: 0 0 20px rgba(179, 0, 0, 0.25);
-}
-
-.logo-card h1 {
-  margin: 0;
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-.logo-card p {
-  margin: 4px 0 0;
-  color: #d0d0d0;
-  font-size: 14px;
-}
-
-/* CONTAINER */
-.container {
-  max-width: 760px;
-  margin: -24px auto 0;
-  padding: 0 16px;
-  position: relative;
-  z-index: 3;
-}
-
-/* SECTION TITLES */
-.section {
-  margin-top: 30px;
-  margin-bottom: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: #ff4d4d;
-  text-shadow: 0 0 10px rgba(255, 59, 59, 0.18);
-}
-
-/* FAVORITES */
-#favoritesSection {
-  display: none;
-}
-
-.favorites-slider {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-}
-
-.favorite-chip {
-  min-width: 220px;
-  display: block;
-  padding: 18px;
-  border-radius: 24px;
-  text-decoration: none;
-  color: #ffffff;
-  background: linear-gradient(135deg, #8B0000, #B30000);
-  box-shadow:
-    0 14px 34px rgba(179, 0, 0, 0.35),
-    0 6px 20px rgba(0, 0, 0, 0.35);
-}
-
-.favorite-chip-title {
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.favorite-chip-sub {
-  font-size: 12px;
-  opacity: 0.85;
-}
-
-/* CARDS */
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.favItem {
-  position: relative;
-}
-
-.button {
-  display: block;
-  padding: 20px 58px 20px 20px;
-  border-radius: 24px;
-  text-decoration: none;
-  color: #ffffff;
-  background:
-    linear-gradient(135deg, #121212, #1a1a1a);
-  border: 1px solid rgba(255, 59, 59, 0.12);
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.35),
-    0 0 24px rgba(179, 0, 0, 0.06);
-  transition: all 0.2s ease;
-}
-
-.button:hover {
-  border-color: rgba(255, 59, 59, 0.22);
-}
-
-.button:active {
-  transform: scale(0.98);
-}
-
-.button-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.button-sub {
-  font-size: 12px;
-  color: #9f9f9f;
-}
-
-.favStar {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 22px;
-  color: gold;
-  cursor: pointer;
-  text-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
-}
-
-/* SEARCH */
-input {
-  width: 100%;
-  padding: 15px 18px;
-  border: none;
-  border-radius: 18px;
-  font-size: 16px;
-  margin-bottom: 12px;
-  background: #151515;
-  color: #ffffff;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    0 8px 18px rgba(0, 0, 0, 0.25);
-}
-
-input::placeholder {
-  color: #888;
-}
-
-/* BOTTOM NAV */
-.bottom-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 78px;
-  background: rgba(8, 8, 8, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(255, 59, 59, 0.08);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 100;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.45);
-}
-
-.nav-item {
-  color: #8e8e8e;
-  text-align: center;
-  font-size: 22px;
-  transition: all 0.2s ease;
-}
-
-.nav-item span {
-  display: block;
-  margin-top: 4px;
-  font-size: 10px;
-  font-weight: 600;
-}
-
-.nav-item.active {
-  color: #ff3b3b;
-  text-shadow: 0 0 12px rgba(255, 59, 59, 0.30);
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar {
-  display: none;
-}
-</style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-content">
-    <div class="logo-card">
-      <img src="icon.png" alt="Bal Enzo">
-      <div>
-        <h1>Bal Enzo</h1>
-        <p>Billiards & Darts</p>
+  <!-- HOME SCREEN -->
+  <section class="screen active" id="homeScreen">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <img src="icon.png" alt="Bal Enzo" class="hero-logo">
+        <div class="hero-ball">9</div>
       </div>
-    </div>
-  </div>
-</div>
+    </header>
 
-<div class="container">
+    <main class="content">
 
-  <!-- FAVORIETEN -->
-  <div id="favoritesSection">
-    <div class="section">⭐ Mijn Favorieten</div>
-    <div id="favoritesList" class="favorites-slider"></div>
-  </div>
+      <!-- FAVORIETEN -->
+      <section class="block">
+        <div class="block-header">
+          <h2>⭐ Mijn Favorieten</h2>
+          <button class="link-btn">Wijzig</button>
+        </div>
 
-  <!-- TORNOOIEN -->
-  <div class="section">Tornooien</div>
-  <div class="cards">
-    <div class="favItem" data-id="tournament-belgium">
-      <a class="button" href="https://cuescore.com/tournaments/?c=1000237" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🇧🇪 Tornooien België</div>
-        <div class="button-sub">Alle tornooien in België</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+        <div class="favorites-row">
+          <div class="favorite-card">
+            <div class="favorite-icon">👤</div>
+            <div class="favorite-title">Mijn profiel</div>
+          </div>
 
-    <div class="favItem" data-id="tournament-netherlands">
-      <a class="button" href="https://cuescore.com/tournaments/?c=1000231" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🇳🇱 Tornooien Nederland</div>
-        <div class="button-sub">Alle tornooien in Nederland</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
-  </div>
+          <div class="favorite-card">
+            <div class="favorite-icon">🏆</div>
+            <div class="favorite-title">Belgische Beker</div>
+          </div>
 
-  <!-- COMPETITIES -->
-  <div class="section">Competities</div>
-  <div class="cards">
-    <div class="favItem" data-id="competition-be1">
-      <a class="button" href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🏆 Eerste Klasse</div>
-        <div class="button-sub">Standen en uitslagen</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+          <div class="favorite-card">
+            <div class="favorite-icon">🎱</div>
+            <div class="favorite-title">Break & Play<br>Poule 1</div>
+          </div>
 
-    <div class="favItem" data-id="competition-be2">
-      <a class="button" href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🏆 Tweede Klasse</div>
-        <div class="button-sub">Standen en uitslagen</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+          <div class="favorite-card">
+            <div class="favorite-icon">🏆</div>
+            <div class="favorite-title">Competitie<br>Nederland</div>
+          </div>
+        </div>
+      </section>
 
-    <div class="favItem" data-id="competition-be3">
-      <a class="button" href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🏆 Derde Klasse</div>
-        <div class="button-sub">Standen en uitslagen</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+      <!-- LIVE NU -->
+      <section class="panel">
+        <div class="block-header">
+          <h2>🔴 Live Nu</h2>
+          <button class="link-btn">Bekijk alles</button>
+        </div>
 
-    <div class="favItem" data-id="competition-be-beker">
-      <a class="button" href="https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🏆 Belgische Beker</div>
-        <div class="button-sub">Schema en resultaten</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
-  </div>
+        <div class="live-item">
+          <div class="table-number">1</div>
+          <div class="live-info">
+            <div class="live-title">Tafel 1</div>
+            <div class="live-subtitle">Competitie BE Eerste Klasse</div>
+          </div>
+          <div class="live-badge">LIVE</div>
+        </div>
 
-  <!-- BREAK & PLAY -->
-  <div class="section">Break & Play</div>
-  <div class="cards">
-    <div class="favItem" data-id="bepoule1">
-      <a class="button" href="https://cuescore.com/tournament/POULE+1+BREAK+%2526+PLAY+-WINTER+2025-2026+%2AClubcompetitie%2A/72368467" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Poule 1</div>
-        <div class="button-sub">Clubcompetitie</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+        <div class="live-item">
+          <div class="table-number">2</div>
+          <div class="live-info">
+            <div class="live-title">Tafel 2</div>
+            <div class="live-subtitle">Break & Play Poule 1</div>
+          </div>
+          <div class="live-badge">LIVE</div>
+        </div>
+      </section>
 
-    <div class="favItem" data-id="bepoule2">
-      <a class="button" href="https://cuescore.com/tournament/POULE+2+BREAK+%2526+PLAY+-WINTER+2025-2026+%2AClubcompetitie%2A/72368668" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Poule 2</div>
-        <div class="button-sub">Clubcompetitie</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+      <!-- SNELLE ACTIES -->
+      <section class="block">
+        <h2>⚡ Snelle Acties</h2>
 
-    <div class="favItem" data-id="bepoule3">
-      <a class="button" href="https://cuescore.com/tournament/POULE+3+BREAK+%2526+PLAY+-WINTER+2025-2026+%2AClubcompetitie%2A/72368791" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Poule 3</div>
-        <div class="button-sub">Clubcompetitie</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+        <div class="quick-grid">
+          <div class="quick-card">
+            <div class="quick-icon">📺</div>
+            <div class="quick-title">Live Scores</div>
+            <div class="quick-subtitle">Volg wedstrijden live</div>
+          </div>
 
-    <div class="favItem" data-id="bepoule4">
-      <a class="button" href="https://cuescore.com/tournament/POULE+4+BREAK+%2526+PLAY+-WINTER+2025-2026+%2AClubcompetitie%2A/72369007" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Poule 4</div>
-        <div class="button-sub">Clubcompetitie</div>
-      </a>
-      <span class="favStar">☆</span>
+          <div class="quick-card">
+            <div class="quick-icon">🪑</div>
+            <div class="quick-title">Tafel reserveren</div>
+            <div class="quick-subtitle">Reserveer eenvoudig</div>
+          </div>
+
+          <div class="quick-card">
+            <div class="quick-icon">🎱</div>
+            <div class="quick-title">Clubpagina</div>
+            <div class="quick-subtitle">Info over onze club</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </section>
+
+  <!-- COMPETITIES SCREEN -->
+  <section class="screen" id="competitionsScreen">
+    <div class="page-header">🏆 Competities</div>
+
+    <div class="tab-bar">
+      <button class="tab active">België</button>
+      <button class="tab">Nederland</button>
+      <button class="tab">Bekers</button>
     </div>
 
-    <div class="favItem" data-id="bepoule5">
-      <a class="button" href="https://cuescore.com/tournament/POULE+5+BREAK+%2526+PLAY+-WINTER+2025-2026+%2AClubcompetitie%2A/72369142" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Poule 5</div>
-        <div class="button-sub">Clubcompetitie</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
-  </div>
+    <main class="content">
+      <div class="competition-card">
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Competitie BE Eerste Klasse</div>
+          <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </div>
 
-  <!-- CLUB -->
-  <div class="section">Club</div>
-  <div class="cards">
-    <div class="favItem" data-id="club-page">
-      <a class="button" href="https://cuescore.com/bal-enzobilliardsdarts" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🎱 Clubpagina</div>
-        <div class="button-sub">Bal Enzo op CueScore</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+      <div class="competition-card">
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Competitie BE Tweede Klasse</div>
+          <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </div>
+    </main>
+  </section>
 
-    <div class="favItem" data-id="club-live">
-      <a class="button" href="https://cuescore.com/venue/table/jumbotron/?venueId=1280972&branchId=1" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">📺 Live Scores</div>
-        <div class="button-sub">Live wedstrijden in de club</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
+  <!-- CLUB SCREEN -->
+  <section class="screen" id="clubScreen">
+    <div class="page-header">🎱 Club</div>
 
-    <div class="favItem" data-id="club-reservation">
-      <a class="button" href="https://www.bal-enzo.be/reservaties/" target="_blank" rel="noopener noreferrer">
-        <div class="button-title">🪑 Tafel reserveren</div>
-        <div class="button-sub">Reserveer eenvoudig online</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
-  </div>
+    <main class="content">
+      <div class="club-grid">
+        <div class="club-card">
+          <div class="club-image"></div>
+          <div class="club-title">Live Scores</div>
+        </div>
 
-  <!-- SPELER ZOEKEN -->
-  <div class="section">Speler zoeken</div>
-  <input id="playerName" placeholder="Naam speler">
-  <a class="button" href="javascript:void(0)" onclick="searchPlayer()">
-    <div class="button-title">🔎 Zoek speler</div>
-    <div class="button-sub">Zoek rechtstreeks in CueScore</div>
-  </a>
+        <div class="club-card">
+          <div class="club-image"></div>
+          <div class="club-title">Tafel reserveren</div>
+        </div>
 
-  <!-- MIJN CUESCORE -->
-  <div class="section">Mijn CueScore</div>
-  <div class="cards">
-    <a class="button" href="javascript:void(0)" onclick="setProfile()">
-      <div class="button-title">⚙️ Mijn profiel instellen</div>
-      <div class="button-sub">Sla je persoonlijke profiel op</div>
-    </a>
+        <div class="club-card">
+          <div class="club-image"></div>
+          <div class="club-title">Clubpagina</div>
+        </div>
+      </div>
+    </main>
+  </section>
 
-    <div class="favItem" data-id="myProfile">
-      <a class="button" href="javascript:void(0)" onclick="openProfile()">
-        <div class="button-title">👤 Mijn profiel</div>
-        <div class="button-sub">Open jouw opgeslagen profiel</div>
-      </a>
-      <span class="favStar">☆</span>
-    </div>
-  </div>
+  <!-- PROFIEL SCREEN -->
+  <section class="screen" id="profileScreen">
+    <div class="page-header">👤 Mijn profiel</div>
 
-</div>
+    <main class="content">
+      <div class="profile-item">
+        <div>
+          <div class="profile-title">Mijn Cuescore profiel</div>
+          <div class="profile-subtitle">Bekijk en beheer je profiel</div>
+        </div>
+        <div class="profile-arrow">↗</div>
+      </div>
 
-<div class="bottom-nav">
-  <div class="nav-item active">🏠<span>Home</span></div>
-  <div class="nav-item">⭐<span>Favs</span></div>
-  <div class="nav-item">🏆<span>Competities</span></div>
-  <div class="nav-item">👤<span>Profiel</span></div>
-</div>
+      <div class="profile-item">
+        <div>
+          <div class="profile-title">Instellingen</div>
+          <div class="profile-subtitle">App voorkeuren</div>
+        </div>
+        <div class="profile-arrow">›</div>
+      </div>
 
-<script>
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      <div class="profile-item logout">
+        <div>
+          <div class="profile-title">Uitloggen</div>
+          <div class="profile-subtitle">Veilig uitloggen</div>
+        </div>
+        <div class="profile-arrow">›</div>
+      </div>
+    </main>
+  </section>
 
-if (favorites.length === 0) {
-  const backup = JSON.parse(localStorage.getItem('favorites_backup')) || [];
-  if (backup.length > 0) {
-    favorites = backup;
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }
-}
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-target="homeScreen">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Home</span>
+    </button>
 
-function saveFavorites() {
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-  localStorage.setItem('favorites_backup', JSON.stringify(favorites));
-}
+    <button class="nav-item" data-target="homeScreen">
+      <span class="nav-icon">⭐</span>
+      <span class="nav-label">Favorieten</span>
+    </button>
 
-function setupStars() {
-  document.querySelectorAll('.favStar').forEach(star => {
-    star.addEventListener('click', function(e) {
-      e.preventDefault(); e.stopPropagation();
-      const id = this.parentElement.dataset.id;
+    <button class="nav-item" data-target="competitionsScreen">
+      <span class="nav-icon">🏆</span>
+      <span class="nav-label">Competities</span>
+    </button>
 
-      if (favorites.includes(id)) {
-        favorites = favorites.filter(f => f !== id);
-        this.textContent = '☆';
-      } else {
-        favorites.push(id);
-        this.textContent = '⭐';
-      }
+    <button class="nav-item" data-target="clubScreen">
+      <span class="nav-icon">🎱</span>
+      <span class="nav-label">Club</span>
+    </button>
 
-      saveFavorites();
-      updateFavoritesSection();
-    });
-  });
-}
+    <button class="nav-item" data-target="profileScreen">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profiel</span>
+    </button>
+  </nav>
 
-function updateFavoritesSection() {
-  const section = document.getElementById('favoritesSection');
-  const list = document.getElementById('favoritesList');
-  list.innerHTML = '';
-
-  if (favorites.length === 0) {
-    section.style.display = 'none';
-    return;
-  }
-
-  section.style.display = 'block';
-
-  favorites.forEach(id => {
-    const orig = document.querySelector(`.favItem[data-id="${id}"] .button`);
-    if (!orig) return;
-
-    const title = orig.querySelector('.button-title')?.textContent || 'Favoriet';
-    const sub = orig.querySelector('.button-sub')?.textContent || '';
-    const href = orig.getAttribute('href');
-    const onclick = orig.getAttribute('onclick');
-
-    const chip = document.createElement('a');
-    chip.className = 'favorite-chip';
-
-    if (onclick) {
-      chip.href = 'javascript:void(0)';
-      chip.setAttribute('onclick', onclick);
-    } else {
-      chip.href = href;
-      chip.target = '_blank';
-      chip.rel = 'noopener noreferrer';
-    }
-
-    chip.innerHTML = `
-      <div class="favorite-chip-title">${title}</div>
-      <div class="favorite-chip-sub">${sub}</div>
-    `;
-
-    list.appendChild(chip);
-  });
-}
-
-function searchPlayer() {
-  const name = document.getElementById('playerName').value.trim();
-  if (name) {
-    window.open('https://cuescore.com/search?q=' + encodeURIComponent(name), '_blank');
-  }
-}
-
-function setProfile() {
-  const link = prompt('Plak je CueScore profiel link');
-  if (link) {
-    localStorage.setItem('cuescoreProfile', link);
-    localStorage.setItem('cuescoreProfile_backup', link);
-    alert('Profiel opgeslagen');
-  }
-}
-
-function openProfile() {
-  let link = localStorage.getItem('cuescoreProfile');
-
-  if (!link) {
-    const backup = localStorage.getItem('cuescoreProfile_backup');
-    if (backup) {
-      localStorage.setItem('cuescoreProfile', backup);
-      link = backup;
-      alert('Profiel automatisch hersteld 👍');
-    }
-  }
-
-  if (link) {
-    window.open(link, '_blank');
-  } else {
-    alert('Stel eerst je profiel in');
-  }
-}
-
-window.onload = () => {
-  document.querySelectorAll('.favStar').forEach(s => s.textContent = '☆');
-
-  favorites.forEach(id => {
-    const item = document.querySelector(`.favItem[data-id="${id}"]`);
-    if (item) {
-      item.querySelector('.favStar').textContent = '⭐';
-    }
-  });
-
-  setupStars();
-  updateFavoritesSection();
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-};
-</script>
-
+  <script src="app.js"></script>
 </body>
 </html>
