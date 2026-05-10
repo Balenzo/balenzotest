@@ -2,10 +2,10 @@
 // FAVORIETEN
 // ===============================
 
-// Favorieten laden uit localStorage
+// Favorieten laden
 let favorites = JSON.parse(localStorage.getItem('favorites'));
 
-// Als er nog geen favorieten zijn, standaard "Mijn profiel"
+// Standaard enkel Mijn profiel
 if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
   favorites = ['myProfile'];
   localStorage.setItem('favorites', JSON.stringify(favorites));
@@ -31,15 +31,13 @@ const favoriteOptions = {
   }
 };
 
-// Favorieten tonen op het Home-scherm
+// Favorieten tonen
 function renderFavorites() {
   const favoritesRow = document.querySelector('.favorites-row');
   if (!favoritesRow) return;
 
-  // Leegmaken
   favoritesRow.innerHTML = '';
 
-  // Favorieten toevoegen
   favorites.forEach(id => {
     const item = favoriteOptions[id];
     if (!item) return;
@@ -56,9 +54,49 @@ function renderFavorites() {
   });
 }
 
-// Popup om favorieten te kiezen
+// Sterretjes initialiseren
+function setupFavoriteStars() {
+  const stars = document.querySelectorAll('.favorite-star');
+
+  stars.forEach(star => {
+    const id = star.getAttribute('data-favorite-id');
+    if (!id) return;
+
+    // Toon juiste ster
+    star.textContent = favorites.includes(id) ? '⭐' : '☆';
+
+    // Klikgedrag
+    star.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(f => f !== id);
+      } else {
+        favorites.push(id);
+      }
+
+      // Zorg dat er altijd minstens één favoriet is
+      if (favorites.length === 0) {
+        favorites = ['myProfile'];
+      }
+
+      // Opslaan
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+
+      // Opnieuw renderen
+      renderFavorites();
+      setupFavoriteStars();
+    });
+  });
+}
+
+// Uitleg bij knop "Wijzig"
 function openFavoritesEditor() {
-  alert("Tik op de sterretjes bij de verschillende onderdelen om favorieten toe te voegen of te verwijderen.");
+  alert(
+    "Tik op de sterretjes (☆) bij de verschillende onderdelen " +
+    "om favorieten toe te voegen of te verwijderen."
+  );
 }
 
 // ===============================
@@ -67,13 +105,11 @@ function openFavoritesEditor() {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // -------------------------------
   // Schermen en navigatie
-  // -------------------------------
   const screens = document.querySelectorAll('.screen');
   const navButtons = document.querySelectorAll('.nav-item');
 
-  // Scherm tonen
+  // Functie om scherm te tonen
   function showScreen(screenId) {
     screens.forEach(screen => {
       screen.classList.remove('active');
@@ -95,17 +131,13 @@ document.addEventListener('DOMContentLoaded', function () {
   navButtons.forEach(button => {
     button.addEventListener('click', function () {
 
-      // Actieve knop aanpassen
       navButtons.forEach(btn => {
         btn.classList.remove('active');
       });
 
       this.classList.add('active');
 
-      // Doelscherm
-      const target = this.getAttribute('data-target');
-
-      // Favorieten-knop scrollt naar favorieten op Home
+      // Favorieten-knop
       if (this.querySelector('.nav-label')?.textContent === 'Favorieten') {
         showScreen('homeScreen');
 
@@ -123,15 +155,14 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // Normale schermwissel
+      const target = this.getAttribute('data-target');
       if (target) {
         showScreen(target);
       }
     });
   });
 
-  // -------------------------------
   // Competitie-tabs
-  // -------------------------------
   const tabs = document.querySelectorAll('.tab');
 
   tabs.forEach(tab => {
@@ -141,14 +172,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // -------------------------------
   // Favorieten tonen
-  // -------------------------------
   renderFavorites();
 
-  // -------------------------------
-  // Service Worker
-  // -------------------------------
+  // Sterretjes activeren
+  setupFavoriteStars();
+
+  // Service Worker registreren
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('Service Worker geregistreerd'))
