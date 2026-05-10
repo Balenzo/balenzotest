@@ -427,3 +427,22 @@ button.competition-card {
   background: linear-gradient(180deg, #d60000, #8b0000);
   color: #fff;
 }
+
+/* Zorg dat de favorieten-popup scrollbaar is */
+.modal-content {
+  max-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+}
+
+#favoritesOptions {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 8px;
+  margin-right: -8px;
+}
+
+.modal-actions {
+  flex-shrink: 0;
+}
