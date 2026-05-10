@@ -130,6 +130,67 @@ function openFavoritesEditor() {
 // APP INITIALISATIE
 // ===============================
 
+// Beschikbare favorieten
+const favoriteOptions = {
+  myProfile: { icon: '👤', title: 'Mijn profiel' },
+  'club-live': { icon: '📺', title: 'Live Scores' },
+  'club-reservation': { icon: '🪑', title: 'Tafel reserveren' },
+  'club-page': { icon: '🎱', title: 'Clubpagina' },
+  'competition-be1': { icon: '🏆', title: 'Eerste Klasse' },
+  'competition-be2': { icon: '🏆', title: 'Tweede Klasse' },
+  'competition-be3': { icon: '🏆', title: 'Derde Klasse' },
+  'competition-be-beker': { icon: '🏆', title: 'Belgische Beker' },
+  'tournament-netherlands': { icon: '🇳🇱', title: 'Tornooien Nederland' }
+};
+
+// Popup openen
+function openFavoritesEditor() {
+  const modal = document.getElementById('favoritesModal');
+  const container = document.getElementById('favoritesOptions');
+
+  if (!modal || !container) return;
+
+  container.innerHTML = '';
+
+  Object.entries(favoriteOptions).forEach(([id, item]) => {
+    const row = document.createElement('label');
+    row.className = 'favorite-option';
+
+    row.innerHTML = `
+      <input type="checkbox" value="${id}"
+             ${favorites.includes(id) ? 'checked' : ''}>
+      <span>${item.icon} ${item.title}</span>
+    `;
+
+    container.appendChild(row);
+  });
+
+  modal.classList.add('show');
+}
+
+// Popup sluiten
+function closeFavoritesEditor() {
+  document.getElementById('favoritesModal')?.classList.remove('show');
+}
+
+// Selectie opslaan
+function saveFavoritesSelection() {
+  const checked = document.querySelectorAll(
+    '#favoritesOptions input[type="checkbox"]:checked'
+  );
+
+  favorites = Array.from(checked).map(input => input.value);
+
+  // Altijd minstens één favoriet
+  if (favorites.length === 0) {
+    favorites = ['myProfile'];
+  }
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+
+  renderFavorites();
+  closeFavoritesEditor();
+}
 document.addEventListener('DOMContentLoaded', function () {
 
   // Schermen en navigatie
