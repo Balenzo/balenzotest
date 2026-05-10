@@ -428,21 +428,40 @@ button.competition-card {
   color: #fff;
 }
 
-/* Zorg dat de favorieten-popup scrollbaar is */
-.modal-content {
-  max-height: calc(100vh - 60px);
-  display: flex;
-  flex-direction: column;
-}
+/* Volledige modal scrollbaar maken */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2000;
 
-#favoritesOptions {
-  flex: 1;
+  /* Scroll mogelijk maken */
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-right: 8px;
-  margin-right: -8px;
 }
 
+.modal.show {
+  display: block;
+}
+
+/* Modal box */
+.modal-content {
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto;
+
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+/* Extra ruimte onderaan zodat de knoppen bereikbaar blijven */
 .modal-actions {
-  flex-shrink: 0;
+  margin-top: 24px;
+  padding-bottom: env(safe-area-inset-bottom);
 }
