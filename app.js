@@ -2,6 +2,55 @@
 // FAVORIETEN
 // ===============================
 
+// Beschikbare favorieten
+const favoriteOptions = {
+  myProfile: {
+    icon: '👤',
+    title: 'Mijn profiel',
+    url: null
+  },
+  'club-live': {
+    icon: '📺',
+    title: 'Live Scores',
+    url: 'https://cuescore.com/venue/table/jumbotron/?venueId=1280972&branchId=1'
+  },
+  'club-reservation': {
+    icon: '🪑',
+    title: 'Tafel reserveren',
+    url: 'https://www.bal-enzo.be/reservaties/'
+  },
+  'club-page': {
+    icon: '🎱',
+    title: 'Clubpagina',
+    url: 'https://cuescore.com/bal-enzobilliardsdarts'
+  },
+  'competition-be1': {
+    icon: '🏆',
+    title: 'Eerste Klasse',
+    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085'
+  },
+  'competition-be2': {
+    icon: '🏆',
+    title: 'Tweede Klasse',
+    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109'
+  },
+  'competition-be3': {
+    icon: '🏆',
+    title: 'Derde Klasse',
+    url: 'https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127'
+  },
+  'competition-be-beker': {
+    icon: '🏆',
+    title: 'Belgische Beker',
+    url: 'https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139'
+  },
+  'tournament-netherlands': {
+    icon: '🇳🇱',
+    title: 'Tornooien Nederland',
+    url: 'https://cuescore.com/tournaments/?c=1000231'
+  }
+};
+
 // Favorieten laden
 let favorites = JSON.parse(localStorage.getItem('favorites'));
 
@@ -11,137 +60,35 @@ if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
-// Beschikbare favorieten
-const favoriteOptions = {
-  // Profiel
-  myProfile: {
-    icon: '👤',
-    title: 'Mijn profiel'
-  },
-
-  // Club
-  'club-live': {
-    icon: '📺',
-    title: 'Live Scores'
-  },
-  'club-reservation': {
-    icon: '🪑',
-    title: 'Tafel reserveren'
-  },
-  'club-page': {
-    icon: '🎱',
-    title: 'Clubpagina'
-  },
-
-  // Competities België
-  'competition-be1': {
-    icon: '🏆',
-    title: 'Eerste Klasse'
-  },
-  'competition-be2': {
-    icon: '🏆',
-    title: 'Tweede Klasse'
-  },
-  'competition-be3': {
-    icon: '🏆',
-    title: 'Derde Klasse'
-  },
-  'competition-be-beker': {
-    icon: '🏆',
-    title: 'Belgische Beker'
-  },
-
-  // Nederland
-  'tournament-netherlands': {
-    icon: '🇳🇱',
-    title: 'Tornooien Nederland'
-  }
-};
-
-// Favorieten tonen
+// Favorieten renderen
 function renderFavorites() {
-  const favoritesRow = document.querySelector('.favorites-row');
-  if (!favoritesRow) return;
+  const container = document.querySelector('.favorites-row');
+  if (!container) return;
 
-  favoritesRow.innerHTML = '';
+  container.innerHTML = '';
 
   favorites.forEach(id => {
     const item = favoriteOptions[id];
     if (!item) return;
 
-    const card = document.createElement('div');
+    const card = document.createElement(item.url ? 'a' : 'div');
+
     card.className = 'favorite-card';
+
+    if (item.url) {
+      card.href = item.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+    }
 
     card.innerHTML = `
       <div class="favorite-icon">${item.icon}</div>
       <div class="favorite-title">${item.title}</div>
     `;
 
-    favoritesRow.appendChild(card);
+    container.appendChild(card);
   });
 }
-
-// Sterretjes initialiseren
-function setupFavoriteStars() {
-  const stars = document.querySelectorAll('.favorite-star');
-
-  stars.forEach(star => {
-    const id = star.getAttribute('data-favorite-id');
-    if (!id) return;
-
-    // Toon juiste ster
-    star.textContent = favorites.includes(id) ? '⭐' : '☆';
-
-    // Klikgedrag
-    star.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (favorites.includes(id)) {
-        favorites = favorites.filter(f => f !== id);
-      } else {
-        favorites.push(id);
-      }
-
-      // Zorg dat er altijd minstens één favoriet is
-      if (favorites.length === 0) {
-        favorites = ['myProfile'];
-      }
-
-      // Opslaan
-      localStorage.setItem('favorites', JSON.stringify(favorites));
-
-      // Opnieuw renderen
-      renderFavorites();
-      setupFavoriteStars();
-    });
-  });
-}
-
-// Uitleg bij knop "Wijzig"
-function openFavoritesEditor() {
-  alert(
-    "Tik op de sterretjes (☆) bij de verschillende onderdelen " +
-    "om favorieten toe te voegen of te verwijderen."
-  );
-}
-
-// ===============================
-// APP INITIALISATIE
-// ===============================
-
-// Beschikbare favorieten
-const favoriteOptions = {
-  myProfile: { icon: '👤', title: 'Mijn profiel' },
-  'club-live': { icon: '📺', title: 'Live Scores' },
-  'club-reservation': { icon: '🪑', title: 'Tafel reserveren' },
-  'club-page': { icon: '🎱', title: 'Clubpagina' },
-  'competition-be1': { icon: '🏆', title: 'Eerste Klasse' },
-  'competition-be2': { icon: '🏆', title: 'Tweede Klasse' },
-  'competition-be3': { icon: '🏆', title: 'Derde Klasse' },
-  'competition-be-beker': { icon: '🏆', title: 'Belgische Beker' },
-  'tournament-netherlands': { icon: '🇳🇱', title: 'Tornooien Nederland' }
-};
 
 // Popup openen
 function openFavoritesEditor() {
@@ -157,7 +104,8 @@ function openFavoritesEditor() {
     row.className = 'favorite-option';
 
     row.innerHTML = `
-      <input type="checkbox" value="${id}"
+      <input type="checkbox"
+             value="${id}"
              ${favorites.includes(id) ? 'checked' : ''}>
       <span>${item.icon} ${item.title}</span>
     `;
@@ -170,10 +118,13 @@ function openFavoritesEditor() {
 
 // Popup sluiten
 function closeFavoritesEditor() {
-  document.getElementById('favoritesModal')?.classList.remove('show');
+  const modal = document.getElementById('favoritesModal');
+  if (modal) {
+    modal.classList.remove('show');
+  }
 }
 
-// Selectie opslaan
+// Favorieten opslaan
 function saveFavoritesSelection() {
   const checked = document.querySelectorAll(
     '#favoritesOptions input[type="checkbox"]:checked'
@@ -191,23 +142,29 @@ function saveFavoritesSelection() {
   renderFavorites();
   closeFavoritesEditor();
 }
+
+// ===============================
+// APP INITIALISATIE
+// ===============================
+
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Schermen en navigatie
+  // Favorieten tonen
+  renderFavorites();
+
+  // Bottom navigation
   const screens = document.querySelectorAll('.screen');
   const navButtons = document.querySelectorAll('.nav-item');
 
-  // Functie om scherm te tonen
   function showScreen(screenId) {
     screens.forEach(screen => {
       screen.classList.remove('active');
     });
 
-    const selectedScreen = document.getElementById(screenId);
+    const selected = document.getElementById(screenId);
 
-    if (selectedScreen) {
-      selectedScreen.classList.add('active');
-
+    if (selected) {
+      selected.classList.add('active');
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -215,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Bottom navigation
   navButtons.forEach(button => {
     button.addEventListener('click', function () {
 
@@ -225,14 +181,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
       this.classList.add('active');
 
-      // Favorieten-knop
-      if (this.querySelector('.nav-label')?.textContent === 'Favorieten') {
+      const label = this.querySelector('.nav-label')?.textContent;
+
+      // Favorieten-knop scrollt naar Mijn Favorieten
+      if (label === 'Favorieten') {
         showScreen('homeScreen');
 
         setTimeout(() => {
-          const favoritesSection = document.querySelector('.favorites-row');
-          if (favoritesSection) {
-            favoritesSection.scrollIntoView({
+          const section = document.querySelector('.favorites-row');
+          if (section) {
+            section.scrollIntoView({
               behavior: 'smooth',
               block: 'start'
             });
@@ -250,35 +208,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Competitie-tabs
+  // Tabs Competities
   const tabs = document.querySelectorAll('.tab');
 
-tabs.forEach(tab => {
-  tab.addEventListener('click', function () {
-    // Actieve tabknop
-    tabs.forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
 
-    // Inhoud verbergen
-    document.querySelectorAll('.tab-content').forEach(content => {
-      content.classList.remove('active');
+      // Tabknoppen
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+
+      // Inhoud verbergen
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Juiste inhoud tonen
+      const tabName = this.dataset.tab;
+      const target = document.getElementById('tab-' + tabName);
+
+      if (target) {
+        target.classList.add('active');
+      }
     });
-
-    // Juiste inhoud tonen
-    const tabName = this.dataset.tab;
-    const target = document.getElementById('tab-' + tabName);
-
-    if (target) {
-      target.classList.add('active');
-    }
   });
-});
-  
-  // Favorieten tonen
-  renderFavorites();
-
-  // Sterretjes activeren
-  setupFavoriteStars();
 
   // Service Worker registreren
   if ('serviceWorker' in navigator) {
