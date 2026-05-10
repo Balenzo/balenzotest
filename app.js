@@ -78,16 +78,27 @@ const favoriteOptions = {
     title: 'Instagram',
     url: 'https://www.instagram.com/'
   },
-  start2pool: {
-    icon: '🎱',
-    title: 'Start2Pool',
-    url: '#'
-  }
+ start2pool: {
+  icon: '🎱',
+  title: 'Start2Pool',
+  url: '#'
+},
+
+'tournaments-belgium': {
+  icon: '🇧🇪',
+  title: 'Tornooien België',
+  url: '#'
+},
+
+'tournaments-netherlands': {
+  icon: '🇳🇱',
+  title: 'Tornooien Nederland',
+  url: '#'
+}
 };
 
 // Favorieten laden
 let favorites = JSON.parse(localStorage.getItem('favorites'));
-
 if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
   favorites = ['myProfile'];
   localStorage.setItem('favorites', JSON.stringify(favorites));
