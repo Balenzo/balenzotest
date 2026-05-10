@@ -384,3 +384,21 @@ body {
 .nav-label {
   font-size: 11px;
 }
+
+/* Links in kaarten dezelfde kleur geven als gewone tekst */
+.quick-card,
+.quick-card:link,
+.quick-card:visited,
+.quick-card:hover,
+.quick-card:active {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Zorg dat ook alle tekst binnen de kaart wit blijft */
+.quick-card .quick-title,
+.quick-card .quick-subtitle,
+.quick-card .quick-icon {
+  color: #ffffff;
+  text-decoration: none;
+}
