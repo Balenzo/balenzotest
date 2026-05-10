@@ -58,37 +58,7 @@ function renderFavorites() {
 
 // Popup om favorieten te kiezen
 function openFavoritesEditor() {
-  const keuze = prompt(
-    "Kies je favorieten:\\n\\n" +
-    "1 = 👤 Mijn profiel\\n" +
-    "2 = 📺 Live Scores\\n" +
-    "3 = 🪑 Tafel reserveren\\n" +
-    "4 = 🎱 Clubpagina\\n\\n" +
-    "Voer nummers in, gescheiden door komma's.\\n" +
-    "Voorbeeld: 1,2,4"
-  );
-
-  if (keuze === null) return;
-
-  let nieuweFavorieten = [];
-
-  if (keuze.includes('1')) nieuweFavorieten.push('myProfile');
-  if (keuze.includes('2')) nieuweFavorieten.push('club-live');
-  if (keuze.includes('3')) nieuweFavorieten.push('club-reservation');
-  if (keuze.includes('4')) nieuweFavorieten.push('club-page');
-
-  // Als niets geselecteerd werd, standaard Mijn profiel
-  if (nieuweFavorieten.length === 0) {
-    nieuweFavorieten = ['myProfile'];
-  }
-
-  favorites = nieuweFavorieten;
-
-  // Opslaan
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-
-  // Onmiddellijk opnieuw tonen
-  renderFavorites();
+  alert("Tik op de sterretjes bij de verschillende onderdelen om favorieten toe te voegen of te verwijderen.");
 }
 
 // ===============================
