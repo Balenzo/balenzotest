@@ -1,197 +1,154 @@
+/* =========================
+   BASIS
+========================= */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   background: #000;
   color: #fff;
-  overflow-x: hidden;
-  padding-bottom: 95px;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* SCREENS */
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================
+   APP CONTAINER
+========================= */
 .screen {
   display: none;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: #000;
+  padding-bottom: 100px;
 }
 
 .screen.active {
   display: block;
 }
 
-/* HERO */
+/* =========================
+   HERO BANNER
+========================= */
 .hero {
   position: relative;
   height: 280px;
+  overflow: hidden;
   background:
     linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.85)),
     url('hero.jpg') center center / cover no-repeat;
 }
+
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.9));
+}
+
+.hero-logo {
+  position: absolute;
+  top: 28px;
+  left: 24px;
+  width: 140px;
+  max-width: 45%;
+  z-index: 2;
 }
 
 .hero-content {
   position: absolute;
-  inset: 0;
+  left: 24px;
+  right: 24px;
+  bottom: 28px;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.hero-logo {
-  width: 210px;
-  max-width: 70%;
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.5));
-}
-
-.hero-ball {
-  position: absolute;
-  right: 48px;
-  top: 105px;
-  width: 78px;
-  height: 78px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hero-content h1 {
+  margin: 0 0 8px;
   font-size: 34px;
-  font-weight: 700;
-  color: #111;
-  background: radial-gradient(circle at 30% 30%, #ffd08a, #c46a00 65%, #6a2f00);
-  box-shadow:
-    inset -8px -8px 18px rgba(0,0,0,0.25),
-    0 12px 30px rgba(0,0,0,0.45);
+  font-weight: 800;
+  line-height: 1.05;
 }
 
-/* CONTENT */
-.content {
-  padding: 20px 16px;
+.hero-content p {
+  margin: 0;
+  color: rgba(255,255,255,0.85);
+  font-size: 15px;
 }
 
-.block {
-  margin-bottom: 28px;
+/* =========================
+   SECTIES
+========================= */
+.section-block {
+  padding: 24px 20px 0;
 }
 
-.block h2,
-.block-header h2,
-.page-header {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.page-header {
-  padding: 24px 16px 10px;
-}
-
-.block-header {
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .link-btn {
   background: none;
   border: none;
-  color: #ff3b30;
-  font-size: 15px;
+  color: #ff4d4d;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
 }
 
-/* FAVORITES */
+/* =========================
+   FAVORIETEN
+========================= */
 .favorites-row {
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
+}
+
+.favorites-row::-webkit-scrollbar {
+  display: none;
 }
 
 .favorite-card {
-  min-width: 110px;
-  height: 145px;
-  padding: 14px 10px;
+  flex: 0 0 auto;
+  min-width: 120px;
+  background: linear-gradient(180deg, #1a1a1a, #111);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 18px;
-  background: linear-gradient(180deg, #b10000, #4d0000);
-  border: 1px solid rgba(255, 90, 90, 0.35);
-  box-shadow:
-    0 8px 24px rgba(120, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+  padding: 18px 14px;
   text-align: center;
+  text-decoration: none;
+  color: #fff;
 }
 
 .favorite-icon {
-  font-size: 34px;
-  margin-bottom: 12px;
+  font-size: 26px;
+  margin-bottom: 8px;
 }
 
 .favorite-title {
   font-size: 14px;
-  line-height: 1.35;
-}
-
-/* PANELS */
-.panel {
-  margin-bottom: 28px;
-  padding: 18px;
-  border-radius: 22px;
-  background: linear-gradient(180deg, #0a0a0a, #101010);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
-
-/* LIVE */
-.live-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-}
-
-.live-item + .live-item {
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.table-number {
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, #d30000, #7c0000);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-}
-
-.live-info {
-  flex: 1;
-}
-
-.live-title {
   font-weight: 600;
-  margin-bottom: 2px;
 }
 
-.live-subtitle {
-  font-size: 13px;
-  color: #a9a9a9;
-}
-
-.live-badge {
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  background: linear-gradient(180deg, #ff2d2d, #b30000);
-}
-
-/* QUICK ACTIONS */
+/* =========================
+   SNELLE ACTIES
+========================= */
 .quick-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -199,227 +156,68 @@ body {
 }
 
 .quick-card {
-  padding: 18px 12px;
+  background: linear-gradient(180deg, #b00000, #7a0000);
   border-radius: 18px;
+  padding: 18px 12px;
   text-align: center;
-  background: linear-gradient(180deg, #b10000, #4d0000);
-  border: 1px solid rgba(255, 90, 90, 0.35);
+  text-decoration: none !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  box-shadow: 0 8px 24px rgba(139, 0, 0, 0.35);
+}
+
+.quick-card * {
+  color: #fff !important;
+  text-decoration: none !important;
 }
 
 .quick-icon {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 8px;
 }
 
 .quick-title {
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-.quick-subtitle {
-  font-size: 12px;
-  color: rgba(255,255,255,0.82);
+/* =========================
+   PAGINA HEADER
+========================= */
+.page-header {
+  padding: 28px 20px 20px;
+  font-size: 28px;
+  font-weight: 800;
 }
 
-/* TAB BAR */
+/* =========================
+   TABS
+========================= */
 .tab-bar {
-  margin: 0 16px;
   display: flex;
-  padding: 4px;
-  border-radius: 18px;
-  background: #0f0f0f;
-  border: 1px solid rgba(255,255,255,0.06);
+  gap: 8px;
+  padding: 0 20px 20px;
 }
 
 .tab {
   flex: 1;
   border: none;
-  background: none;
-  color: #bdbdbd;
+  border-radius: 12px;
   padding: 12px;
-  border-radius: 14px;
-  font-size: 15px;
+  background: #1c1c1c;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .tab.active {
   background: linear-gradient(180deg, #d60000, #8b0000);
-  color: #fff;
 }
 
-/* COMPETITION CARDS */
-.competition-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px;
-  margin-bottom: 14px;
-  border-radius: 22px;
-  background: linear-gradient(90deg, #7c0000, #b00000);
-  border: 1px solid rgba(255, 90, 90, 0.25);
-  box-shadow: 0 10px 28px rgba(120, 0, 0, 0.28);
-}
-
-.competition-icon {
-  font-size: 34px;
-}
-
-.competition-info {
-  flex: 1;
-}
-
-.competition-title {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.competition-subtitle {
-  font-size: 13px;
-  color: rgba(255,255,255,0.88);
-}
-
-.competition-arrow {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-
-/* CLUB */
-.club-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.club-card {
-  border-radius: 20px;
-  overflow: hidden;
-  background: #0f0f0f;
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.club-image {
-  height: 110px;
-  background:
-    linear-gradient(180deg, transparent, rgba(0,0,0,0.35)),
-    url('balenzo.jpg') center/cover no-repeat;
-}
-
-.club-title {
-  padding: 12px;
-  font-weight: 600;
-}
-
-/* PROFILE */
-.profile-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px;
-  margin-bottom: 12px;
-  border-radius: 20px;
-  background: #0f0f0f;
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.profile-title {
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.profile-subtitle {
-  font-size: 13px;
-  color: #a8a8a8;
-}
-
-.profile-arrow {
-  font-size: 24px;
-  color: #8a8a8a;
-}
-
-.profile-item.logout {
-  background: linear-gradient(90deg, #650000, #9a0000);
-}
-
-/* BOTTOM NAV */
-.bottom-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 84px;
-  padding-bottom: env(safe-area-inset-bottom);
-  background: rgba(5, 5, 5, 0.96);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 100;
-}
-
-.nav-item {
-  background: none;
-  border: none;
-  color: #a5a5a5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.nav-item.active {
-  color: #ff3b30;
-}
-
-.nav-icon {
-  font-size: 22px;
-}
-
-.nav-label {
-  font-size: 11px;
-}
-
-/* Links in kaarten dezelfde kleur geven als gewone tekst */
-.quick-card,
-.quick-card:link,
-.quick-card:visited,
-.quick-card:hover,
-.quick-card:active {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* Zorg dat ook alle tekst binnen de kaart wit blijft */
-.quick-card .quick-title,
-.quick-card .quick-subtitle,
-.quick-card .quick-icon {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* Forceer witte tekst voor alle links binnen Quick Cards */
-a.quick-card,
-a.quick-card:link,
-a.quick-card:visited,
-a.quick-card:hover,
-a.quick-card:active,
-a.quick-card:focus,
-a.quick-card * {
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
-
-/* Safari-specifiek */
-a.quick-card {
-  -webkit-text-fill-color: #ffffff !important;
-}
-
+/* =========================
+   TAB CONTENT
+========================= */
 .tab-content {
   display: none;
 }
@@ -428,77 +226,119 @@ a.quick-card {
   display: block;
 }
 
-.card-wrapper {
-  position: relative;
-  margin-bottom: 14px;
+/* =========================
+   CONTENT
+========================= */
+.content {
+  padding: 0 20px;
 }
 
-.card-wrapper .competition-card,
-.card-wrapper .quick-card {
-  margin-bottom: 0;
-}
-
-/* Wrapper rond kaarten */
-.card-wrapper {
-  position: relative;
-  margin-bottom: 14px;
-}
-
-/* Klikbaar sterretje */
-.favorite-star {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 44px;
-  height: 44px;
+/* =========================
+   COMPETITIE KAARTEN
+========================= */
+.competition-card {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+  background: linear-gradient(180deg, #181818, #101010);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.competition-icon {
+  font-size: 28px;
+}
+
+.competition-info {
+  flex: 1;
+}
+
+.competition-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.competition-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+
+.competition-arrow {
   font-size: 24px;
-  color: gold;
+  color: rgba(255,255,255,0.35);
+}
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  display: flex;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  z-index: 1000;
+}
+
+.nav-item {
+  flex: 1;
+  border: none;
+  background: none;
+  color: rgba(255,255,255,0.65);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 20px;
   cursor: pointer;
-  z-index: 999;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
 }
 
-/* Zorg dat de kaart zelf niet extra marge toevoegt */
-.card-wrapper .competition-card,
-.card-wrapper .quick-card {
-  margin-bottom: 0;
+.nav-item.active {
+  color: #ff4d4d;
 }
 
-/* Modal achtergrond */
+.nav-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* =========================
+   MODAL
+========================= */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0,0,0,0.75);
   backdrop-filter: blur(8px);
   z-index: 2000;
   padding: 24px;
 }
 
-/* Modal zichtbaar */
 .modal.show {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Modal box */
 .modal-content {
   width: 100%;
   max-width: 420px;
   background: #111;
   border-radius: 24px;
   padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .modal-content h3 {
@@ -506,7 +346,6 @@ a.quick-card {
   font-size: 22px;
 }
 
-/* Opties */
 .favorite-option {
   display: flex;
   align-items: center;
@@ -520,7 +359,6 @@ a.quick-card {
   height: 20px;
 }
 
-/* Buttons */
 .modal-actions {
   display: flex;
   gap: 12px;
