@@ -427,3 +427,28 @@ a.quick-card {
 .tab-content.active {
   display: block;
 }
+
+.card-wrapper {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.card-wrapper .competition-card,
+.card-wrapper .quick-card {
+  margin-bottom: 0;
+}
+
+.favorite-star {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 24px;
+  color: gold;
+  cursor: pointer;
+  z-index: 20;
+  padding: 8px;              /* groter klikgebied */
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-tap-highlight-color: transparent;
+}
