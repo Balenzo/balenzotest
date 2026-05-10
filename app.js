@@ -1,3 +1,16 @@
+// Favorieten laden
+let favorites = JSON.parse(localStorage.getItem('favorites'));
+
+if (!favorites || !Array.isArray(favorites) || favorites.length === 0) {
+  favorites = ['myProfile']; // standaard enkel Mijn profiel
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+// Toon melding bij klikken op "Wijzig"
+function openFavoritesEditor() {
+  alert("Klik op de sterretjes in de app om favorieten toe te voegen of te verwijderen.");
+}
+
 // Wacht tot de pagina volledig geladen is
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -7,12 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Functie om een scherm te tonen
   function showScreen(screenId) {
-    // Verberg alle schermen
     screens.forEach(screen => {
       screen.classList.remove('active');
     });
 
-    // Toon het geselecteerde scherm
     const selectedScreen = document.getElementById(screenId);
     if (selectedScreen) {
       selectedScreen.classList.add('active');
@@ -23,25 +34,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Klikgedrag voor bottom navigation
+  // Bottom navigation
   navButtons.forEach(button => {
     button.addEventListener('click', function () {
 
-      // Actieve knop aanpassen
       navButtons.forEach(btn => {
         btn.classList.remove('active');
       });
+
       this.classList.add('active');
 
-      // Doelscherm ophalen
       const target = this.getAttribute('data-target');
 
-      // Scherm tonen
       if (target) {
         showScreen(target);
       }
 
-      // Favorieten-knop scrollt naar boven op het home screen
+      // Favorieten-knop scrollt naar favorieten
       if (this.querySelector('.nav-label')?.textContent === 'Favorieten') {
         showScreen('homeScreen');
 
@@ -67,7 +76,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Service Worker registreren (optioneel)
+  // FAVORIETEN TONEN
+  const favoritesRow = document.querySelector('.favorites-row');
+
+  if (favoritesRow) {
+    favoritesRow.innerHTML = '';
+
+    // Standaard kaart: Mijn profiel
+    if (favorites.includes('myProfile')) {
+      favoritesRow.innerHTML = `
+        <div class="favorite-card">
+          <div class="favorite-icon">👤</div>
+          <div class="favorite-title">Mijn profiel</div>
+        </div>
+      `;
+    }
+  }
+
+  // Service Worker registreren
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
       .then(() => console.log('Service Worker geregistreerd'))
