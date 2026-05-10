@@ -96,93 +96,98 @@
     </main>
   </section>
 
- <!-- COMPETITIES SCREEN -->
+<!-- COMPETITIES SCREEN -->
 <section class="screen" id="competitionsScreen">
   <div class="page-header">🏆 Competities</div>
 
+  <!-- Tabs -->
   <div class="tab-bar">
-    <button class="tab active">België</button>
-    <button class="tab">Nederland</button>
-    <button class="tab">Break & Play</button>
+    <button class="tab active" data-tab="belgium">België</button>
+    <button class="tab" data-tab="netherlands">Nederland</button>
+    <button class="tab" data-tab="cups">Bekers</button>
   </div>
 
   <main class="content">
 
-    <!-- Eerste Klasse -->
-    <a class="competition-card"
-       href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085"
-       target="_blank"
-       rel="noopener noreferrer">
+    <!-- BELGIË -->
+    <div class="tab-content active" id="tab-belgium">
 
-      <span class="favorite-star" data-favorite-id="competition-be1">☆</span>
+      <a class="competition-card"
+         href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+EERSTE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130085"
+         target="_blank" rel="noopener noreferrer">
+        <span class="favorite-star" data-favorite-id="competition-be1">☆</span>
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Competitie BE Eerste Klasse</div>
+          <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-      <div class="competition-icon">🏆</div>
+      <a class="competition-card"
+         href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109"
+         target="_blank" rel="noopener noreferrer">
+        <span class="favorite-star" data-favorite-id="competition-be2">☆</span>
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Competitie BE Tweede Klasse</div>
+          <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-      <div class="competition-info">
-        <div class="competition-title">Competitie BE Eerste Klasse</div>
-        <div class="competition-subtitle">Alle info, standen en uitslagen</div>
-      </div>
+      <a class="competition-card"
+         href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127"
+         target="_blank" rel="noopener noreferrer">
+        <span class="favorite-star" data-favorite-id="competition-be3">☆</span>
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Competitie BE Derde Klasse</div>
+          <div class="competition-subtitle">Alle info, standen en uitslagen</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-      <div class="competition-arrow">›</div>
-    </a>
+    </div>
 
-    <!-- Tweede Klasse -->
-    <a class="competition-card"
-       href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+TWEEDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130109"
-       target="_blank"
-       rel="noopener noreferrer">
+    <!-- NEDERLAND -->
+    <div class="tab-content" id="tab-netherlands">
 
-      <span class="favorite-star" data-favorite-id="competition-be2">☆</span>
+      <a class="competition-card"
+         href="https://cuescore.com/tournaments/?c=1000231"
+         target="_blank" rel="noopener noreferrer">
+        <span class="favorite-star" data-favorite-id="tournament-netherlands">☆</span>
+        <div class="competition-icon">🇳🇱</div>
+        <div class="competition-info">
+          <div class="competition-title">Tornooien Nederland</div>
+          <div class="competition-subtitle">Alle Nederlandse tornooien</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-      <div class="competition-icon">🏆</div>
+    </div>
 
-      <div class="competition-info">
-        <div class="competition-title">Competitie BE Tweede Klasse</div>
-        <div class="competition-subtitle">Alle info, standen en uitslagen</div>
-      </div>
+    <!-- BEKERS -->
+    <div class="tab-content" id="tab-cups">
 
-      <div class="competition-arrow">›</div>
-    </a>
+      <a class="competition-card"
+         href="https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139"
+         target="_blank" rel="noopener noreferrer">
+        <span class="favorite-star" data-favorite-id="competition-be-beker">☆</span>
+        <div class="competition-icon">🏆</div>
+        <div class="competition-info">
+          <div class="competition-title">Belgische Beker</div>
+          <div class="competition-subtitle">Schema en resultaten</div>
+        </div>
+        <div class="competition-arrow">›</div>
+      </a>
 
-    <!-- Derde Klasse -->
-    <a class="competition-card"
-       href="https://cuescore.com/tournament/%2A%2A%2ACOMPETITIE+DERDE+PROVINCIALE+BPBF+VLAANDEREN+SEIZOEN+2026%2A%2A%2A/74130127"
-       target="_blank"
-       rel="noopener noreferrer">
-
-      <span class="favorite-star" data-favorite-id="competition-be3">☆</span>
-
-      <div class="competition-icon">🏆</div>
-
-      <div class="competition-info">
-        <div class="competition-title">Competitie BE Derde Klasse</div>
-        <div class="competition-subtitle">Alle info, standen en uitslagen</div>
-      </div>
-
-      <div class="competition-arrow">›</div>
-    </a>
-
-    <!-- Belgische Beker -->
-    <a class="competition-card"
-       href="https://cuescore.com/tournament/%2A%2A%2ABEKER%252FCOUPE+BPBF+VLAANDEREN+2026%2A%2A%2A/74130139"
-       target="_blank"
-       rel="noopener noreferrer">
-
-      <span class="favorite-star" data-favorite-id="competition-be-beker">☆</span>
-
-      <div class="competition-icon">🏆</div>
-
-      <div class="competition-info">
-        <div class="competition-title">Belgische Beker</div>
-        <div class="competition-subtitle">Schema en resultaten</div>
-      </div>
-
-      <div class="competition-arrow">›</div>
-    </a>
+    </div>
 
   </main>
-</section>
-  <!-- CLUB SCREEN -->
+</section>  
+      
+      <!-- CLUB SCREEN -->
   <section class="screen" id="clubScreen">
     <div class="page-header">🎱 Club</div>
 
